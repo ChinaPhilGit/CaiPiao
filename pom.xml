@@ -12,7 +12,7 @@
 	<artifactId>CaiPiao</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CaiPiao</name>
-	<description>Demo project for Spring Boot</description>
+	<description>CaiPiao网站</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -49,8 +49,12 @@
 			<artifactId>jedis</artifactId>
 			<version>2.9.0</version>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
