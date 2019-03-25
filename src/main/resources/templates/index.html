@@ -2,22 +2,23 @@
 <html lang="cn" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>彩票官网</title>
+    <title>巴黎时时彩</title>
 </head>
 <body>
-<H1>Hello World</H1>
-<label th:text="${mo.phase}">
-<label th:text="${mo.beginTime}">
-<label th:text="${mo.endTime}">
-<label th:text="${mo.number1}">
-<label th:text="${mo.number2}">
-<label th:text="${mo.number3}">
-<label th:text="${mo.number4}">
-<label th:text="${mo.number5}">
-<label th:text="${mo.sumNumber}">
-<label th:text="${mo.bigOrSmall}">
-<label th:text="${mo.singleOrDouble}">
-<label th:text="${mo.dragonOrTiger}">
-</label>
+<H1>巴黎时时彩</H1>
+<H2 th:text="${'第'+#numbers.formatInteger(mo.phase,3,'NONE')+'期最新开奖'}">第[]期最新开奖</H2>
+<label th:name="number1" th:text="${mo.number1}"></label>
+<label th:name="number2" th:text="${mo.number2}"></label>
+<label th:name="number3" th:text="${mo.number3}"></label>
+<label th:name="number4" th:text="${mo.number4}"></label>
+<label th:name="number5" th:text="${mo.number5}"></label>
+<br/>
+<H4 th:text="${#numbers.formatInteger(nextPhase,3,'NONE') +'期开奖时间剩余:'}">第[]期开奖时间剩余: 04:31</H4>
+<label id="countdown" th:text="${nextDifferent}"></label>
 </body>
+<script type="text/javascript">
+    setTimeout(()->{
+
+    });
+</script>
 </html>

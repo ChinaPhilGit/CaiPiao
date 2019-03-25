@@ -8,8 +8,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class CaiPiaoEntity implements Serializable {
+
+    private static final long serialVersionUID = -3888244437840424075L;
     //期数
-    private String phase;
+    private Integer phase;
     //时间
     private Date beginTime;
     private Date endTime;
@@ -30,11 +32,11 @@ public class CaiPiaoEntity implements Serializable {
     //    龙虎
     private EnumDragonOrTiger dragonOrTiger;
 
-    public String getPhase() {
+    public Integer getPhase() {
         return phase;
     }
 
-    public void setPhase(String phase) {
+    public void setPhase(Integer phase) {
         this.phase = phase;
     }
 
@@ -131,7 +133,7 @@ public class CaiPiaoEntity implements Serializable {
         }
     }
 
-    private Integer getSumNumber() {
+    public Integer getSumNumber() {
         return this.sumNumber;
     }
 

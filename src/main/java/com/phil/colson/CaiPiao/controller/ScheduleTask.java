@@ -7,22 +7,34 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.Calendar;
 
-@Component
+//@Component
 public class ScheduleTask {
 
     @Autowired
-    private RedisTemplate<String, List<CaiPiaoEntity>> redisTemplate;
+    private RedisTemplate<String, CaiPiaoEntity> redisTemplate;
 
-    @Scheduled(cron = "5 * * * * *")
+//    @Scheduled(cron = "5 * * * * *")
     public void scheduleInsert2Data() {
-        Date dateTime = new Date();
-        List<CaiPiaoEntity> entityList = PhaseFactory.generatePhase(dateTime);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) + 5);
+        CaiPiaoEntity caiPiaoEntity = PhaseFactory.generatePhase(calendar.getTime());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        redisTemplate.opsForValue().set(sdf.format(dateTime), entityList);
+        DecimalFormat df = new DecimalFormat("000");
+
+        String key = sdf.format(caiPiaoEntity.getBeginTime()) + df.format(caiPiaoEntity.getPhase());
+        try {
+            CaiPiaoEntity result = redisTemplate.opsForValue().get(key);
+            if (result == null) {
+                throw new Exception("对象未序列化");
+            }
+        } catch (Exception ex) {
+            redisTemplate.opsForValue().set(key, caiPiaoEntity);
+        }
+
     }
 
 }
