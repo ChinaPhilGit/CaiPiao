@@ -26,10 +26,10 @@ public class PhaseFactory {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.HOUR_OF_DAY, minuteOfDay / 60);
 
-        calendar.set(Calendar.MINUTE, (minuteOfDay % 60) - 5);
+        calendar.set(Calendar.MINUTE, (minuteOfDay % 60));
         entity.setBeginTime(calendar.getTime());
 
-        calendar.set(Calendar.MINUTE, (minuteOfDay % 60));
+        calendar.set(Calendar.MINUTE, (minuteOfDay % 60)+5);
         entity.setEndTime(calendar.getTime());
         entity.setNumber1(RandomFactory.generateNumber());
         entity.setNumber2(RandomFactory.generateNumber());
