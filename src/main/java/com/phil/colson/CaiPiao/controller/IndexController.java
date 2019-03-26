@@ -73,6 +73,9 @@ public class IndexController {
     @ResponseBody
     public String doEdit(@ModelAttribute CaiPiaoVo vo) {
         CaiPiaoEntity caiPiaoEntity = redisTemplate.opsForValue().get(vo.getPhase());
+        if(caiPiaoEntity == null){
+            return "修改失败,请输入期数";
+        }
         if (vo.getNumber1() != null)
             caiPiaoEntity.setNumber1(vo.getNumber1());
         if (vo.getNumber2() != null)

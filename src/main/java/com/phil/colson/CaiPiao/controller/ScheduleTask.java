@@ -11,13 +11,14 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-//@Component
+@Component
 public class ScheduleTask {
 
     @Autowired
     private RedisTemplate<String, CaiPiaoEntity> redisTemplate;
 
-//    @Scheduled(cron = "5 * * * * *")
+    @SuppressWarnings("Duplicates")
+    @Scheduled(cron = "59 * * * * *")
     public void scheduleInsert2Data() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) + 5);
@@ -29,7 +30,8 @@ public class ScheduleTask {
         try {
             CaiPiaoEntity result = redisTemplate.opsForValue().get(key);
             if (result == null) {
-                throw new Exception("对象未序列化");
+                    result = PhaseFactory.generatePhase(calendar.getTime());
+                    redisTemplate.opsForValue().set(key, result);
             }
         } catch (Exception ex) {
             redisTemplate.opsForValue().set(key, caiPiaoEntity);
