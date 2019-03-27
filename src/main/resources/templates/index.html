@@ -1,44 +1,206 @@
 <!DOCTYPE html>
 <html lang="cn" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
     <title>巴黎时时彩</title>
-</head>
-<body>
-<H1>巴黎时时彩</H1>
-<H2 th:text="${'第'+#numbers.formatInteger(mo.phase,3,'NONE')+'期最新开奖'}">第[]期最新开奖</H2>
-<label th:name="number1" th:text="${mo.number1}"></label>
-<label th:name="number2" th:text="${mo.number2}"></label>
-<label th:name="number3" th:text="${mo.number3}"></label>
-<label th:name="number4" th:text="${mo.number4}"></label>
-<label th:name="number5" th:text="${mo.number5}"></label>
-<br/>
-<H4 th:text="${#numbers.formatInteger(nextPhase,3,'NONE') +'期开奖时间剩余:'}">第[]期开奖时间剩余: 04:31</H4>
-<label id="countdown" th:text="${nextDifferent}"></label>
-<table>
-    <thead>
-    <tr>
-        <td>期数</td>
-        <td>时间</td>
-        <td>开奖号码</td>
-        <td>总和</td>
-        <td>龙虎</td>
-    </tr>
-    </thead>
-    <tbody>
-        <tr th:each="item:${caiPiaoEntityList}">
+  </head>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .header {
+      text-align: center;
+      padding: 10px 0;
+      background-color: red;
+      color: #fff;
+    }
+    .body {
+      text-align: center;
+      background-color: blue;
+      color: #fff;
+      padding: 10px 0;
+    }
+    .body h2 {
+      margin-bottom: 15px;
+    }
+    .body label {
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+      border-radius: 30px;
+      background-color: #fff;
+      margin: 0 5px;
+      line-height: 30px;
+      color: blue;
+    }
+    .count-down {
+      background-color: #000;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+    }
+    .count-down-time {
+      background-color: #000;
+      color: red;
+    }
+    .tips {
+      width:300px;
+      max-width: 100%;
+      overflow: hidden;
+      margin: 0 auto;
+      padding: 10px 0;
+      text-align: center;
+      color: red;
+      word-break: keep-all;
+      white-space: nowrap;
+    }
+    .table {
+      width: 100%;
+      text-align: center;
+    }
+    .table thead {
+      background-color: aqua;
+    }
+    .table td {
+      border: 1px solid #eee;
+    }
+    .单 {
+      color: blue;
+    }
+    .双 {
+      color: red;
+    }
+    .小 {
+      color: blue;
+    }
+    .大 {
+      color: red;
+    }
+    .虎 {
+      color: blue;
+    }
+    .龙 {
+      color: red;
+    }
+    .合 {
+      color: green;
+    }
+    .number1{
+
+    }
+    .number2{
+      color: yellow;
+    }
+    .number3{
+      
+    }
+    .number4{
+      
+    }
+    .number5{
+      color: red;
+    }
+    .number6{
+      
+    }
+    .number7{
+      
+    }
+    .number8{
+      
+    }
+    .number9{
+      
+    }
+  </style>
+  <body>
+    <div class="wp">
+      <div class="header">
+        <h1 class="title">巴黎时时彩</h1>
+      </div>
+      <div class="body">
+        <h2
+          th:text="${'第'+#numbers.formatInteger(mo.phase,3,'NONE')+'期最新开奖'}"
+        >
+          第[]期最新开奖
+        </h2>
+        <label th:name="number1" th:text="${mo.number1}"></label>
+        <label th:name="number2" th:text="${mo.number2}"></label>
+        <label th:name="number3" th:text="${mo.number3}"></label>
+        <label th:name="number4" th:text="${mo.number4}"></label>
+        <label th:name="number5" th:text="${mo.number5}"></label>
+      </div>
+      <div class="count-down">
+        <label
+          th:text="${#numbers.formatInteger(nextPhase,3,'NONE') +'期开奖时间剩余:'}"
+          >第[]期开奖时间剩余: 04:31</label
+        >
+        <label
+          class="count-down-time"
+          id="countdown"
+          th:text="${nextDifferent}"
+        ></label>
+      </div>
+      <div class="tips">
+        
+      </div>
+      <table class="table" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <td>期数</td>
+            <td>时间</td>
+            <td>开奖号码</td>
+            <td colspan="3">总和</td>
+            <td>龙虎</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="item:${caiPiaoEntityList}">
             <td th:text="${#numbers.formatInteger(item.phase,3,'NONE')}"></td>
             <td th:text="${#dates.format(item.beginTime, 'HH:mm')}"></td>
-            <td th:text="${item.number1+''+item.number2+''+item.number3+''+item.number4+''+item.number5}"></td>
-            <td th:text="${item.sumNumber+' '+item.singleOrDouble+' '+item.bigOrSmall}"></td>
-            <td th:text="${item.dragonOrTiger}"></td>
-        </tr>
-    </tbody>
-</table>
-</body>
-<script type="text/javascript">
-    setTimeout(() => {
-        location.reload();
-    },1000) ;
-</script>
+            <td>
+              <span th:class="${'number' + item.number1}" th:text="${item.number1}"></span>
+              <span th:class="${'number' + item.number2}" th:text="${item.number2}"></span>
+              <span th:class="${'number' + item.number3}" th:text="${item.number3}"></span>
+              <span th:class="${'number' + item.number4}" th:text="${item.number4}"></span>
+              <span th:class="${'number' + item.number5}" th:text="${item.number5}"></span>
+            </td>
+            <td th:text="${item.sumNumber}"></td>
+            <td
+              th:class="${item.singleOrDouble}"
+              th:text="${item.singleOrDouble}"
+            ></td>
+            <td th:class="${item.bigOrSmall}" th:text="${item.bigOrSmall}"></td>
+            <td
+              th:class="${item.dragonOrTiger}"
+              th:text="${item.dragonOrTiger}"
+            ></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+  <script type="text/javascript">
+    setTimeout(function(){
+      //location.reload();
+    }, 1000)
+    var $tips = document.querySelector('.tips');
+    var str = '巴黎时时彩是巴黎地区的一种高频彩，开奖公平公正，平台提供开奖娱乐，谢绝任何形式的赌博！';
+    function tips(){
+      $tips.innerHTML = str;
+      str = str.substring(1, str.length) +　str.substring(0, 1);
+    }
+    setInterval(tips,400);
+  </script>
 </html>
