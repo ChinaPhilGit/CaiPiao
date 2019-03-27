@@ -192,9 +192,17 @@
     </div>
   </body>
   <script type="text/javascript">
-    setTimeout(function(){
-      //location.reload();
-    }, 1000)
+    var $countdown = document.querySelector('#countdown');
+    var time = Math.floor(+$countdown.innerHTML / 1000 );
+    function countdown(){
+      if(time <= 0 ) return location.reload();
+      var second = time % 60;
+      var minute = Math.floor(time / 60);
+      time--;
+      $countdown.innerHTML = minute + '分' + second + '秒';
+    }
+    countdown();
+    setInterval(countdown, 1000);
     var $tips = document.querySelector('.tips');
     var str = '巴黎时时彩是巴黎地区的一种高频彩，开奖公平公正，平台提供开奖娱乐，谢绝任何形式的赌博！';
     function tips(){
