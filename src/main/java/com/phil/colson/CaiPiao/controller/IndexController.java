@@ -16,7 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-@RequestMapping("/caipiao/main")
+@RequestMapping
 @Controller
 public class IndexController {
 
@@ -24,7 +24,7 @@ public class IndexController {
     private RedisTemplate<String, CaiPiaoEntity> redisTemplate;
 
 
-    @GetMapping("/index")
+    @GetMapping
     public String index(Model model) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
@@ -61,12 +61,12 @@ public class IndexController {
             }
         }
         model.addAttribute("caiPiaoEntityList", caiPiaoEntityList);
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/edit")
     public String edit() {
-        return "/edit";
+        return "edit";
     }
 
     @PostMapping("/do/edit")
